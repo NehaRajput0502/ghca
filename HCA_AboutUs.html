@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HCA - About Us</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css"><style>
+
+
+/* Section Styles */
+.section {
+  padding: 40px 0;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: var(--white);
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-light);
+  margin-bottom: 3rem;
+  text-align: justify; 
+  /* max-width: 700px; */
+}
+
+/* Card Styles */
+.card {
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  background: var(--white);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.card-text {
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}
+
+/* Book Viewer Styles */
+.book-viewer {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+}
+
+.viewer-container {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  background: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #141414;
+  overflow: hidden;
+}
+
+.page-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: opacity 0.3s ease;
+}
+
+.page-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--primary);
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.page-nav:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.page-nav.prev {
+  left: 20px;
+}
+
+.page-nav.next {
+  right: 20px;
+}
+
+.page-nav:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-nav:disabled:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--primary);
+  transform: translateY(-50%);
+}
+
+.page-counter {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: var(--text-light);
+  font-weight: 600;
+  /* background: rgba(255, 255, 255, 0.8); */
+  padding: 8px 16px;
+  border-radius: 20px;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+/* Thumbnail Styles - UPDATED */
+.thumbnails-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px; /* Increased gap between thumbnails */
+  margin-top: 25px;
+  padding: 15px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--gray-200);
+}
+
+.thumbnails-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.thumbnails-container::-webkit-scrollbar-track {
+  background: var(--gray-200);
+  border-radius: 4px;
+}
+
+.thumbnails-container::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+.thumbnail {
+  width: 70px; /* Slightly larger thumbnails */
+  height: 95px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  overflow: hidden;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+  flex-shrink: 0; /* Prevent thumbnails from shrinking */
+}
+
+.thumbnail:hover {
+  opacity: 0.9;
+  transform: translateY(-5px);
+}
+
+.thumbnail.active {
+  border-color: var(--primary);
+  opacity: 1;
+  box-shadow: var(--shadow);
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--primary);
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 30px;
+  position: relative;
+  margin-bottom: 40px;
+  width: 50%;
+}
+
+.timeline-item:nth-child(even) {
+  align-self: flex-end;
+  justify-content: flex-start;
+  padding-left: 30px;
+  padding-right: 0;
+  left: 50%;
+}
+
+.timeline-content {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  width: 100%;
+  position: relative;
+  border-left: 4px solid var(--primary);
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  border-left: none;
+  border-right: 4px solid var(--primary);
+}
+
+.timeline-content::before {
+  content: '';
+  position: absolute;
+  right: -10px;
+  top: 20px;
+  width: 20px;
+  height: 20px;
+  background: var(--white);
+  transform: rotate(45deg);
+  box-shadow: 2px -2px 2px rgba(0,0,0,0.05);
+}
+
+.timeline-item:nth-child(even) .timeline-content::before {
+  right: auto;
+  left: -10px;
+  box-shadow: -2px 2px 2px rgba(0,0,0,0.05);
+}
+
+.timeline-year {
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.timeline-desc {
+  color: var(--text-light);
+}
+
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: -10px;
+  background: var(--primary);
+  border: 4px solid var(--white);
+  top: 20px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timeline-item:nth-child(even)::after {
+  right: auto;
+  left: -10px;
+}
+
+/* Values Section */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.value-card {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border-radius: 12px;
+  background: #363636;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+}
+
+.value-icon {
+  width: 70px;
+  height: 70px;
+  background: var(--primary);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 1.8rem;
+}
+
+.value-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #cbb6b6;
+}
+
+.value-desc {
+  color: var(--text-light);
+}
+
+/* Trust Indicators */
+.trust-section {
+  background: var(--light-bg);
+  padding: 80px 0;
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.trust-item {
+  text-align: center;
+  padding: 2rem;
+}
+
+.trust-icon {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.trust-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.trust-text {
+  color: var(--text-light);
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--dark-bg) 100%);
+  color: var(--white);
+  text-align: center;
+  padding: 80px 0;
+}
+
+.cta-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+
+.cta-text {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.9;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 15px 35px;
+  background: var(--white);
+  color: var(--primary);
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  background: var(--gray-100);
+}
+
+
+/* NEW STYLES FOR THE RESTRUCTURED LAYOUT */
+.heritage-section {
+  margin: 3rem 0;
+}
+
+.heritage-content {
+  margin-bottom: 2rem;
+}
+
+.heritage-viewer {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  
+  .header-actions {
+    margin: 20px 0 0 0;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .display {
+    font-size: 2.5rem;
+  }
+  
+  .timeline::before {
+    left: 30px;
+  }
+  
+  .timeline-item {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 0;
+  }
+  
+  .timeline-item:nth-child(even) {
+    left: 0;
+    padding-left: 70px;
+  }
+  
+  .timeline-item::after {
+    left: 21px;
+    right: auto;
+  }
+  
+  .timeline-item:nth-child(even)::after {
+    left: 21px;
+  }
+  
+  .timeline-content::before {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .display {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .section {
+    padding: 60px 0;
+  }
+  
+  .hero {
+    padding: 80px 0 60px;
+  }
+  
+  .heritage-viewer {
+    padding: 1rem;
+  }
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="HCA_Homepage.html" class="logo">
+        <img src="hca_logo.png" alt="HCA Monogram Logo">
+      </a>
+      
+      <div class="nav-container" id="nav-container">
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="HCA_Homepage.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="HCA_Garments_Hub.html" class="nav-link">Garments</a>
+          </li>
+          <li class="nav-item">
+            <a href="HCA_Leather_Hub.html" class="nav-link">Leather</a>
+          </li>
+          <li class="nav-item">
+            <a href="HCA_Mattress_Hub.html" class="nav-link">Mattresses</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link active">About Us</a>
+          </li>
+        </ul>
+        
+        <div class="header-actions">
+          <a href="HCA_Contact.html" class="contact-btn">
+            Contact Us
+          </a>
+        </div>
+      </div>
+      
+      <div class="mobile-toggle" id="mobile-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" style="padding: 120px 0 140px;">
+    <div class="container">
+      <h1 class="display">About Us</h1><br>
+      <p class="sub"  style="max-width:none;">Since 1910, Harichand Anand & Co. has been synonymous with quality<br>craftsmanship and innovation in textiles and manufacturing.</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Our Story</h2>
+      <p class="section-subtitle" style="max-width:none;">From a humble beginning in Lahore to becoming a <i>trusted name in multiple industries</i>, HCA has been shaping the sewing industry since 1910. Founded by <b>Hari Chand Anand</b>, the first <b>Asian General Manager of Singer</b>. The company laid strong foundations of expertise and innovation.
+
+<br>His legacy was carried forward by Mr. D.C. Anand, who trained at <b>Adler, Germany (1933–1939)</b> and successfully expanded the business from Lahore (undivided India) to Delhi after <b>1947</b>. Today, under the guidance of <b>Mr. Anil Anand</b>, the third generation, HCA continues to grow as a pioneer in industrial sewing machines and automation. An Economics graduate, Mr. Anand has traveled the world exploring cutting-edge technologies, production techniques, and is also preparing the next generation to carry forward this vision.
+
+<br>With over <b>10 offices</b> and a strong dealer network across India. HCA caters to diverse industries into garments, leather goods, upholstery, footwear, furniture, bedding, tents, parachutes, surgical equipment, car seat covers, ordnance, and many more. Backed by a <i>team of trained professionals</i>, HCA has built a reputation not just as a supplier, but as a solution provider for the sewing industry.
+
+<br>Our commitment remains clear: delivering the latest global technology, strong after-sales support, and <b>“Making Automation Affordable”</b> for all..</p>
+  
+<section class="container">
+
+  <img src="ceo.jpeg" style="width: 100%; height: 100%;">
+</div>
+</section>
+<!-- Overview of Services Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Overview</h2>
+    <p class="section-subtitle" style="max-width:none;">
+      Hari Chand Anand & Co. (HCA) is not just a machinery supplier, we are solution partners for the garment and textile industry. Our expertise lies in creating end-to-end sewing and automation solutions that address real manufacturing challenges. From advanced sewing technologies for garments, leather, home furnishings, and technical textiles, to genuine spare parts, accessories, and intelligent automation systems, we design solutions that improve efficiency, reduce manual dependency, and drive sustainable growth. With a strong nationwide service network and a century of technical know-how, HCA works alongside every customer to deliver tailored, future-ready solutions that ensure long-term success.
+    </p>
+  </div>
+</section>
+
+
+
+  <!-- Current mission Section -->
+         <section class="section">
+    <div class="container">
+      <h2 class="section-title">Current mission</h2>
+          <p class="section-subtitle" style="max-width:none;">At HCA, our mission is to empower manufacturers by making automation solutions both accessible and impactful. We go beyond supplying equipment; we focus on enabling productivity, reducing reliance on manual labor, and supporting sustainable growth. Every solution we deliver is guided by one goal: helping our customers achieve lasting success in a fast-evolving industry. </p>
+      <p class="section-subtitle">The principles that guide everything we do</p>
+      
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-ribbon"></i>
+          </div>
+          <h3 class="value-title">Quality Craftsmanship</h3>
+          <p class="value-desc">Maintaining the highest standards in all our products, just as we did in 1910.</p>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <h3 class="value-title">Innovation</h3>
+          <p class="value-desc">Blending traditional techniques with modern technology for exceptional results.</p>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-hands-helping"></i>
+          </div>
+          <h3 class="value-title">Customer Trust</h3>
+          <p class="value-desc">Building long-term relationships based on reliability and exceptional service.</p>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-history"></i>
+          </div>
+          <h3 class="value-title">Heritage</h3>
+          <p class="value-desc">Honoring our rich history while continuously evolving to meet modern needs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Indicators -->
+  <section class="trust-section">
+    <div class="container">
+      <h2 class="section-title">Why Customers Trust Us</h2>
+      <p class="section-subtitle">Our commitment to excellence reflected in numbers</p>
+      
+      <div class="trust-grid">
+        <div class="trust-item">
+          <div class="trust-icon">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <div class="trust-number">115+</div>
+          <div class="trust-text">Years of Experience</div>
+        </div>
+        
+        <div class="trust-item">
+          <div class="trust-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="trust-number">1500+</div>
+          <div class="trust-text">Satisfied Businesses</div>
+        </div>
+        
+        <div class="trust-item">
+          <div class="trust-icon">
+            <i class="fas fa-project-diagram"></i>
+          </div>
+          <div class="trust-number">10</div>
+          <div class="trust-text">Offices Across India</div>
+        </div>
+        
+        <div class="trust-item">
+          <div class="trust-icon">
+            <i class="fas fa-award"></i>
+          </div>
+          <div class="trust-number">25+</div>
+          <div class="trust-text">Industry Awards</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="cta-title">Experience the HCA Difference</h2>
+      <p class="cta-text">Join countless satisfied customers who have trusted our products for over a century.</p>
+      <a href="HCA_Contact.html" class="cta-button">Get in Touch</a>
+    </div>
+  </section>
+
+    <!-- Footer -->
+  <footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="footer-heading">Legal</div>
+      <a href="#">Terms of Use</a>
+      <a href="#">Cookies Policy</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading">Products</div>
+      <a href="HCA_Garments_Hub.html">Garments</a>
+      <a href="HCA_Leather_Hub.html">Leather &amp; Heavy-Duty</a>
+      <a href="HCA_Mattress_Hub.html">Mattresses</a>
+      <a href="HCA_Pattern_Swing.html">Pattern Sewing Machines</a>
+      <a href="HCA_Embroidery_mc.html">Embroidery Machines</a>
+      <a href="HCA_Cutting_mc.html">Cutting Machines</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading">Social Media</div>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/grouphca/" style="color: #b3a0a0;"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/hcaindia" style="color: #b3a0a0;"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/hca.co/" style="color: #b3a0a0;"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/channel/UCZQc6oBcEEQ_SFdJqPNamJQ" style="color: #b3a0a0;"><i class="fab fa-youtube"></i></a>
+        <a href="https://in.linkedin.com/company/hcaco" style="color: #b3a0a0;"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    
+    <div class="footer-col">
+      <div class="footer-heading"><a href="HCA_Contact.html">Contact Us</a></div>
+      <div>Mobile: <a href="tel:+918860086712">+91 8860086712</a></div>
+      <div>Landline: 011 4656 1111</div>
+      <div><a href="mailto:enquiry@grouphca.com">enquiry@grouphca.com</a></div>
+      <div><a href="mailto:sales1@grouphca.com">sales1@grouphca.com</a></div> 
+    </div>
+    
+    
+  </div>
+  <div class="footer-bottom">©1910 - 2024 HARI CHAND ANAND &amp; CO. ALL RIGHTS RESERVED.</div>
+</footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navContainer = document.getElementById('nav-container');
+    
+    mobileToggle.addEventListener('click', () => {
+      mobileToggle.classList.toggle('active');
+      navContainer.classList.toggle('active');
+    });
+    
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+</html>

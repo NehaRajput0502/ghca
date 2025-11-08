@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HCA — Heritage Library</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #766c6c;
+  --primary-dark: #494343;
+  --secondary: #e67e22;
+  --secondary-dark: #ca6f1e;
+  --bg:#141414;
+  --accent: #16a085;
+  --light-bg: #f9f9f9;
+  --dark-bg: #2c3e50;
+  --text-dark: #2c3e50;
+  --text-light: #7f8c8d;
+  --white: #ffffff;
+  --gray-100: #f7fafc;
+  --gray-200: #edf2f7;
+  --gray-300: #e2e8f0;
+  --gray-400: #cbd5e0;
+  --gray-500: #a0aec0;
+  --gray-600: #718096;
+  --gray-700: #4a5568;
+  --gray-800: #2d3748;
+  --gray-900: #1a202c;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text-dark);
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+.container {
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(20, 20, 20, 0.98);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--gray-800);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.header.scrolled {
+  box-shadow: var(--shadow);
+}
+
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 42px;
+  width: auto;
+  transition: all 0.3s ease;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 8px;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-light);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: var(--primary);
+  background-color: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  border-bottom: 4px solid var(--primary);
+}
+
+.nav-link i {
+  margin-left: 6px;
+  font-size: 12px;
+  transition: transform 0.3s ease;
+}
+
+.nav-item:hover .nav-link i {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 220px;
+  background: #141414;
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.nav-item:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-200);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: var(--gray-50);
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: 20px;
+}
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: var(--primary);
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.contact-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.mobile-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin-left: 16px;
+}
+
+.mobile-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: var(--text-light);
+  margin: 2px 0;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.mobile-toggle.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.mobile-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-toggle.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Hero Section */
+.hero {
+  padding: 100px 0 80px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--dark-bg) 100%);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+  background-size: cover;
+}
+
+.display {
+  font-weight: 900;
+  line-height: 1.05;
+  font-size: 3.5rem;
+  margin: 0 0 16px;
+  color: var(--white);
+  position: relative;
+}
+
+.sub {
+  font-size: 1.25rem;
+  opacity: 0.9;
+  color: var(--gray-200);
+  max-width: 700px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+/* Section Styles */
+section {
+    padding: 80px 0;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: var(--white);
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-light);
+  margin-bottom: 3rem;
+  max-width: 700px;
+}
+
+/* Person Profile Section */
+.person-profile {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  margin-bottom: 80px;
+}
+
+.person-profile:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.person-image {
+  flex: 1;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;   
+}
+
+.person-image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* or "contain" if you don’t want any cropping */
+  display: block;
+  flex: 0 0 35%;   /* photo takes ~35% width */
+}
+
+.person-image-placeholder {
+  width: 100%;
+  max-width: 380px; 
+  height: auto;
+  aspect-ratio: 3 / 4;   /* keeps a portrait shape */
+  background: linear-gradient(45deg, var(--primary-dark), var(--primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 1.2rem;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.person-image-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* fills box and crops neatly */
+  display: block;
+}
+
+.person-content {
+  flex: 0 0 65%;   /* text takes ~65% width */
+}
+
+.person-name {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.person-dates {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.person-tagline {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 25px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.person-tagline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 80%;
+  width: 5px;
+  background: var(--primary);
+  transform: translateY(-50%);
+}
+
+.person-desc {
+  color: var(--text-light);
+  margin-bottom: 25px;
+  line-height: 1.8;
+}
+
+.person-highlights {
+  margin-bottom: 25px;
+}
+
+.person-highlight {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.person-highlight i {
+  color: var(--primary);
+  margin-right: 12px;
+  margin-top: 4px;
+}
+
+.person-highlight span {
+  color: var(--text-light);
+  flex: 1;
+}
+
+
+/* Book Viewer Styles */
+.book-viewer {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+}
+
+.viewer-container {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  background: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #141414;
+  overflow: hidden;
+}
+
+.page-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: opacity 0.3s ease;
+}
+
+.page-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--primary);
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.page-nav:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.page-nav.prev {
+  left: 20px;
+}
+
+.page-nav.next {
+  right: 20px;
+}
+
+.page-nav:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-nav:disabled:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--primary);
+  transform: translateY(-50%);
+}
+
+.page-counter {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: var(--text-light);
+  font-weight: 600;
+  /* background: rgba(255, 255, 255, 0.8); */
+  padding: 8px 16px;
+  border-radius: 20px;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+/* Thumbnail Styles - UPDATED */
+.thumbnails-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px; /* Increased gap between thumbnails */
+  margin-top: 25px;
+  padding: 15px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--gray-200);
+}
+
+.thumbnails-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.thumbnails-container::-webkit-scrollbar-track {
+  background: var(--gray-200);
+  border-radius: 4px;
+}
+
+.thumbnails-container::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+.thumbnail {
+  width: 70px; /* Slightly larger thumbnails */
+  height: 95px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  overflow: hidden;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+  flex-shrink: 0; /* Prevent thumbnails from shrinking */
+}
+
+.thumbnail:hover {
+  opacity: 0.9;
+  transform: translateY(-5px);
+}
+
+.thumbnail.active {
+  border-color: var(--primary);
+  opacity: 1;
+  box-shadow: var(--shadow);
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* Book Details */
+.book-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.book-feature {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.book-feature:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+}
+
+.book-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--primary);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.5rem;
+}
+
+.book-feature-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+}
+
+.book-feature-desc {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.footer {
+  background: #141414;
+  border-top: 1px solid #535353;
+  padding: 12px 0 0 0;
+  font-family: Inter, sans-serif;
+  color:snow;
+}
+.footer-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 2fr 3fr 2fr;
+  gap: 40px;
+  align-items: flex-start;
+}
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
+}
+.footer-heading {
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #9c9191;
+}
+.footer-social {
+  margin-top: 16px;
+  display: flex;
+  gap: 0;
+}
+.footer-social a {
+  color: #ffffff;      /* Makes icons fully bright/white */
+  opacity: 1;          /* Ensures maximum visibility */
+  font-size: 22px;     /* Adjust icon size if needed */
+  margin: 0 8px;       /* Spacing between icons */
+  transition: color 0.3s, box-shadow 0.3s, opacity 0.3s;
+}
+
+.footer-social a:hover, .footer-social a:focus {
+  color: #737a7c;
+  box-shadow: 0 0 16px #50515299;
+  transform: scale(1.12);
+  background: rgba(65, 66, 66, 0.09);
+  border-radius: 6px;
+}
+
+
+.footer-social a {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px solid #ddd;
+  /* border-right: none; */
+  color: #222;
+  font-size: 20px;
+  text-align: center;
+}
+.footer-social a:last-child {
+  border-right: 1px solid #ddd;
+}
+.footer-company {
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  margin-top: 6px;
+}
+.footer-bottom {
+  text-align: center;
+  margin: 24px 0 0 0;
+  font-size: 16px;
+  color: #535353;
+}
+@media (max-width: 980px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+}
+@media (max-width: 600px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    text-align: center;
+  }
+}
+
+/* Mobile menu styles */
+@media (max-width: 1024px) {
+  .mobile-toggle {
+    display: flex;
+  }
+  
+  .nav-container {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 80px);
+    background: var(--bg);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+  }
+  
+  .nav-container.active {
+    transform: translateX(0);
+  }
+  
+  .nav-menu {
+    flex-direction: column;
+    width: 100%;
+    gap: 4px;
+  }
+  
+  .nav-link {
+    padding: 14px 16px;
+    width: 100%;
+    justify-content: space-between;
+    border-radius: 8px;
+    border: 1px solid var(--gray-700);
+  }
+
+  .dropdown {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    display: none;
+    margin-top: 4px;
+    margin-left: 16px;
+    border-left: 2px solid var(--gray-200);
+    padding-left: 16px;
+  }
+  
+  .nav-item.active .dropdown {
+    display: block;
+  }
+
+  .nav-item.active .nav-link i {
+    transform: rotate(180deg);
+  }
+  
+  .header-actions {
+    margin: 20px 0 0 0;
+    width: 100%;
+    justify-content: center;
+  }
+  .section {
+    padding: 60px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .display {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .hero {
+    padding: 80px 0 60px;
+  }
+  
+
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="HCA_Homepage.html" class="logo">
+        <img src="hca_logo.png" alt="HCA Monogram Logo">
+      </a>
+      
+      <div class="nav-container" id="nav-container">
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="HCA_Homepage.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="HCA_Garments_Hub.html" class="nav-link">Garments</a>
+          </li>
+          <li class="nav-item">
+            <a href="HCA_Leather_Hub.html" class="nav-link">Leather</a>
+          </li>
+          <li class="nav-item">
+            <a href="HCA_Mattress_Hub.html" class="nav-link">Mattresses</a>
+          </li>
+        </ul>
+        
+        <div class="header-actions">
+          <a href="HCA_Contact.html" class="contact-btn">
+            Contact Us
+          </a>
+        </div>
+      </div>
+      
+      <div class="mobile-toggle" id="mobile-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="display">Heritage Library</h1>
+      <p class="sub">"Anand's Embroidery Book," Harichand Anand & Co., Lahore, c.1910 — digitized for students and buyers.</p>
+    </div>
+  </section>
+
+  <!-- Book Section -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Anand's Embroidery Book</h2>
+      <p class="section-subtitle">A historical collection of freehand embroidery designs originally published in Lahore circa 1910</p>
+      
+      <div>
+          <!-- Book Viewer -->
+          <div class="book-viewer">
+            <div class="viewer-container">
+              <div class="page-content">
+                <img src="https://placehold.co/800x1000/e6d3b6/766c6c?text=Page+1+Loading..." alt="Embroidery Design Page" class="page-image" id="current-page">
+              </div>
+              <button class="page-nav prev" id="prev-page" disabled>
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="page-nav next" id="next-page">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <div class="page-counter" id="page-counter">Page 1 of 35</div>
+            </div>
+            
+            <div class="thumbnails-container" id="thumbnails">
+              <!-- Thumbnails will be generated by JavaScript -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Family Legacy Section -->
+  <section class="section" id="family-legacy">
+    <div class="container">
+      <h2 class="section-title">The Anand Family Legacy</h2>
+      <p class="section-subtitle">A century of leadership, innovation, and dedication to excellence</p>
+      
+      <!-- Hari Chand Anand -->
+      <div class="person-profile">
+        <div class="person-image">
+
+          <div class="person-image-placeholder">
+<img src="hca1-Photo.png" alt="Hari Chand Anand - Founder of HCA">
+          </div>
+        </div>
+        <div class="person-content">
+          <h3 class="person-name">Hari Chand Anand</h3>
+          <p class="person-dates">1867 – 1954</p>
+          <p class="person-tagline">A visionary who turned collaboration into legacy</p>
+          <p class="person-desc">Hari Chand Anand was not only the visionary founder of HCA but also a man of warmth, wisdom, and resilience. Born in 1867, he built the foundation of our company on values of trust, collaboration, and mutual growth.</p>
+          <p class="person-desc">He believed that every person who works with HCA becomes part of a family. His philosophy was simple yet powerful: when we share responsibilities, no one carries the burden alone, and together, we all grow.</p>
+          <div class="person-highlights">
+            <div class="person-highlight">
+              <i class="fas fa-star"></i>
+              <span>Visionary Leader: Built HCA to connect people and grow "as a family"</span>
+            </div>
+            <div class="person-highlight">
+              <i class="fas fa-hands-helping"></i>
+              <span>Collaborative Model: Innovative approach to shared workload and mutual growth</span>
+            </div>
+            <div class="person-highlight">
+              <i class="fas fa-music"></i>
+              <span>Historic Achievements: Celebrated as Asia's first non-white singer</span>
+            </div>
+            <div class="person-highlight">
+              <i class="fas fa-heart"></i>
+              <span>Humanitarian Spirit: Remembered for generosity and helping those in need</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Deewan Chand Anand -->
+      <div class="person-profile">
+        <div class="person-image">
+          <div class="person-image-placeholder">
+<img src="hca2-Photo.png" alt="Deewan Chand Anand - Second-generation of HCA">
+          </div>
+        </div>
+        <div class="person-content">
+          <h3 class="person-name">Deewan Chand Anand</h3>
+          <p class="person-dates">1910 – 2010</p>
+          <p class="person-tagline">Discipline. Dedication. Legacy.</p>
+          <p class="person-desc">Deewan Chand Anand carried forward the vision of his father, Hari Chand Anand, with discipline and perseverance. Born in 1910 in Lahore, he received his early schooling there and later pursued engineering in Edler, Germany (1932–1939).</p>
+          <p class="person-desc">Known for his punctuality and uncompromising work ethic, Deewan Chand Anand enhanced his own abilities and dedicated his life to strengthening the company. Under his leadership, Harichand Anand & Co. continued to grow while staying rooted in the values of trust and responsibility.</p>
+          <div class="person-highlights">
+            <div class="person-highlight">
+              <i class="fas fa-clock"></i>
+              <span>Work Ethic: Known for exceptional punctuality and discipline</span>
+            </div>
+            <div class="person-highlight">
+              <i class="fas fa-rocket"></i>
+              <span>Growth: Expanded HCA with technical expertise and international perspective</span>
+            </div>
+            <div class="person-highlight">
+              <i class="fas fa-compass"></i>
+              <span>Principles: Intolerance for mediocrity, commitment to excellence</span>
+            </div>
+            <div class="person-highlight">
+              <i class="fas fa-history"></i>
+              <span>Longevity: Stewarded the company through a century of life (1910-2010)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Anil Anand -->
+      <div class="person-profile">
+        <div class="person-image">
+          <div class="person-image-placeholder">
+<img src="hca3-Photo.png" alt="Anil Anand - Ceo of HCA">
+          </div>
+        </div>
+        <div class="person-content">
+          <h3 class="person-name">Anil Anand</h3>
+          <p class="person-dates">Current Managing Director</p>
+          <p class="person-tagline">Modernizing tradition with innovation</p>
+          <p class="person-desc">Mr. Anil Anand is the Managing Director of Hari Chand Anand & Co. (HCA), representing the third generation of the founding Anand family to lead the company. An Economics graduate, he joined HCA in the late 1970s and has steered the company's growth for over four decades.</p>
+          <p class="person-desc">Under his guidance, HCA has modernized and expanded its reach, entering international markets like Bangladesh and Ethiopia. He has traveled globally to learn about the latest sewing technologies, bringing back knowledge to improve HCA's offerings.</p>
+          <div class="person-highlights">
+            <div class="person-highlight">
+              <i class="fas fa-globe"></i>
+              <span>Global Expansion: Established operations in Bangladesh and Ethiopia</span>
+            </div>
+            <div class="person-highlight">
+              <i class="fas fa-handshake"></i>
+              <span>Partnerships: Built relationships with global sewing machine brands</span>
+            </div>
+            <div class="person-highlight">
+              <i class="fas fa-chart-line"></i>
+              <span>Growth: Guided HCA through industry changes across decades</span>
+            </div>
+            <div class="person-highlight">
+              <i class="fas fa-users"></i>
+              <span>Mentorship: Training the fourth generation for business continuity</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Bhavya Anand -->
+      <div class="person-profile">
+        <div class="person-image">
+          <div class="person-image-placeholder">
+            Portrait of Bhavya Anand
+          </div>
+        </div>
+        <div class="person-content">
+          <h3 class="person-name">Bhavya Anand</h3>
+          <p class="person-dates">Fourth Generation</p>
+          <p class="person-tagline">Continuing the legacy into the future</p>
+          <p class="person-desc">Bhavya Anand represents the fourth generation of the Anand family, preparing to continue the legacy with innovation and dedication to excellence. He brings fresh perspectives and modern approaches while honoring the values that have defined HCA for over a century.</p>
+          <p class="person-desc">As the next generation leader, Bhavya is being groomed to take HCA into the future, ensuring that the company remains at the forefront of industrial sewing and automation technology while maintaining its family values and commitment to customer success.</p>
+          <div class="person-highlights">
+            <div class="person-highlight">
+              <i class="fas fa-lightbulb"></i>
+              <span>Innovation: Bringing fresh perspectives to a century-old business</span>
+            </div>
+            <div class="person-highlight">
+              <i class="fas fa-code"></i>
+              <span>Technology: Focusing on digital transformation and modern solutions</span>
+            </div>
+            <div class="person-highlight">
+              <i class="fas fa-balance-scale"></i>
+              <span>Values: Honoring tradition while embracing innovation</span>
+            </div>
+            <div class="person-highlight">
+              <i class="fas fa-network-wired"></i>
+              <span>Expansion: Exploring new markets and opportunities</span>
+            </div>
+            <div class="person-highlight">
+              <i class="fas fa-seedling"></i>
+              <span>Growth: Nurturing the company for future generations</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Book Features -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Book Features</h2>
+      <p class="section-subtitle">This historical collection includes a wide variety of embroidery designs</p>
+      
+      <div class="book-details">
+        <div class="book-feature">
+          <div class="book-icon">
+            <i class=" fas fa-pen-nib"></i>
+          </div>
+          <h3 class="book-feature-title">Floral Patterns</h3>
+          <p class="book-feature-desc">Intricate designs inspired by nature's beauty</p>
+        </div>
+        
+        <div class="book-feature">
+          <div class="book-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <h3 class="book-feature-title">Leaves & Foliage</h3>
+          <p class="book-feature-desc">Natural elements for elegant embroidery</p>
+        </div>
+        
+        <div class="book-feature">
+          <div class="book-icon">
+            <i class="fas fa-dragon"></i>
+          </div>
+          <h3 class="book-feature-title">Chinese Motifs</h3>
+          <p class="book-feature-desc">Eastern-inspired patterns and designs</p>
+        </div>
+        
+        <div class="book-feature">
+          <div class="book-icon">
+            <i class="fas fa-child"></i>
+          </div>
+          <h3 class="book-feature-title">Children at Play</h3>
+          <p class="book-feature-desc">Charming scenes of childhood activities</p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="footer-heading">Legal</div>
+      <a href="#">Terms of Use</a>
+      <a href="#">Cookies Policy</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading">Products</div>
+      <a href="HCA_Garments_Hub.html">Garments</a>
+      <a href="HCA_Leather_Hub.html">Leather &amp; Heavy-Duty</a>
+      <a href="HCA_Mattress_Hub.html">Mattresses</a>
+      <a href="HCA_Pattern_Swing.html">Pattern Sewing Machines</a>
+      <a href="HCA_Embroidery_mc.html">Embroidery Machines</a>
+      <a href="HCA_Cutting_mc.html">Cutting Machines</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading">Social Media</div>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/grouphca/" style="color: #b3a0a0;"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/hcaindia" style="color: #b3a0a0;"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/hca.co/" style="color: #b3a0a0;"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/channel/UCZQc6oBcEEQ_SFdJqPNamJQ" style="color: #b3a0a0;"><i class="fab fa-youtube"></i></a>
+        <a href="https://in.linkedin.com/company/hcaco" style="color: #b3a0a0;"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    
+    <div class="footer-col">
+      <div class="footer-heading"><a href="HCA_Contact.html">Contact Us</a></div>
+      <div>Mobile: <a href="tel:+918860086712">+91 8860086712</a></div>
+      <div>Landline: 011 4656 1111</div>
+      <div><a href="mailto:enquiry@grouphca.com">enquiry@grouphca.com</a></div>
+      <div><a href="mailto:sales1@grouphca.com">sales1@grouphca.com</a></div> 
+    </div>
+    
+    
+  </div>
+  <div class="footer-bottom">©1910 - 2024 HARI CHAND ANAND &amp; CO. ALL RIGHTS RESERVED.</div>
+</footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navContainer = document.getElementById('nav-container');
+    
+    mobileToggle.addEventListener('click', () => {
+      mobileToggle.classList.toggle('active');
+      navContainer.classList.toggle('active');
+    });
+    
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Book Viewer Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentPageEl = document.getElementById('current-page');
+      const prevButton = document.getElementById('prev-page');
+      const nextButton = document.getElementById('next-page');
+      const pageCounter = document.getElementById('page-counter');
+      const thumbnailsContainer = document.getElementById('thumbnails');
+      
+      // REPLACE THESE ARRAYS WITH YOUR ACTUAL IMAGE PATHS
+      // ================================================
+      // Add the URLs to your 15 full-size page images here:
+      const pageImages = [
+        'Heritage_Book/01.jpg',
+        'Heritage_Book/02.jpg',
+        'Heritage_Book/03.jpg',
+        'Heritage_Book/04.jpg',
+        'Heritage_Book/05.jpg',
+        'Heritage_Book/06.jpg',
+        'Heritage_Book/07.jpg',
+        'Heritage_Book/08.jpg',
+        'Heritage_Book/09.jpg',
+        'Heritage_Book/10.jpg',
+        'Heritage_Book/11.jpg',
+        'Heritage_Book/12.jpg',
+        'Heritage_Book/13.jpg',
+        'Heritage_Book/14.jpg',
+        'Heritage_Book/15.jpg',
+        'Heritage_Book/16.jpg',
+        'Heritage_Book/17.jpg',
+        'Heritage_Book/18.jpg',
+        'Heritage_Book/19.jpg',
+        'Heritage_Book/20.jpg',
+        'Heritage_Book/21.jpg',
+        'Heritage_Book/22.jpg',
+        'Heritage_Book/23.jpg',
+        'Heritage_Book/24.jpg',
+        'Heritage_Book/25.jpg',
+        'Heritage_Book/26.jpg',
+        'Heritage_Book/27.jpg',
+        'Heritage_Book/28.jpg',
+        'Heritage_Book/29.jpg',
+        'Heritage_Book/30.jpg',
+        'Heritage_Book/31.jpg',
+        'Heritage_Book/32.jpg',
+        'Heritage_Book/33.jpg',
+        'Heritage_Book/34.jpg',
+        'Heritage_Book/35.jpg'
+      ];
+      
+      // Add the URLs to your 15 thumbnail images here:
+      // (If you don't have separate thumbnails, you can use the same images)
+      const thumbnailImages = [
+        'Heritage_Book/01.jpg',
+        'Heritage_Book/02.jpg',
+        'Heritage_Book/03.jpg',
+        'Heritage_Book/04.jpg',
+        'Heritage_Book/05.jpg',
+        'Heritage_Book/06.jpg',
+        'Heritage_Book/07.jpg',
+        'Heritage_Book/08.jpg',
+        'Heritage_Book/09.jpg',
+        'Heritage_Book/10.jpg',
+        'Heritage_Book/11.jpg',
+        'Heritage_Book/12.jpg',
+        'Heritage_Book/13.jpg',
+        'Heritage_Book/14.jpg',
+        'Heritage_Book/15.jpg',
+        'Heritage_Book/16.jpg',
+        'Heritage_Book/17.jpg',
+        'Heritage_Book/18.jpg',
+        'Heritage_Book/19.jpg',
+        'Heritage_Book/20.jpg',
+        'Heritage_Book/21.jpg',
+        'Heritage_Book/22.jpg',
+        'Heritage_Book/23.jpg',
+        'Heritage_Book/24.jpg',
+        'Heritage_Book/25.jpg',
+        'Heritage_Book/26.jpg',
+        'Heritage_Book/27.jpg',
+        'Heritage_Book/28.jpg',
+        'Heritage_Book/29.jpg',
+        'Heritage_Book/30.jpg',
+        'Heritage_Book/31.jpg',
+        'Heritage_Book/32.jpg',
+        'Heritage_Book/33.jpg',
+        'Heritage_Book/34.jpg',
+        'Heritage_Book/35.jpg'
+      ];
+      // ================================================
+      
+      const totalPages = pageImages.length;
+      let currentPage = 1;
+      let isNavigating = false;
+      
+      // Generate thumbnails
+      for (let i = 0; i < totalPages; i++) {
+        const thumbnail = document.createElement('div');
+        thumbnail.className = 'thumbnail';
+        thumbnail.setAttribute('data-page', i+1);
+        if (i === 0) thumbnail.classList.add('active');
+        
+        const img = document.createElement('img');
+        // Use your thumbnail images
+        img.src = thumbnailImages[i];
+        img.alt = `Page ${i+1} thumbnail`;
+        img.loading = "lazy";
+        
+        thumbnail.appendChild(img);
+        thumbnail.addEventListener('click', (e) => {
+          // Prevent default behavior that might cause cursor movement
+          e.preventDefault();
+          goToPage(i+1);
+        });
+        
+        thumbnailsContainer.appendChild(thumbnail);
+      }
+      
+      // Function to update page display
+      function updatePage() {
+        // Add a slight fade effect when changing pages
+        currentPageEl.style.opacity = '0';
+        
+        setTimeout(() => {
+          // Update main image with your page images
+          currentPageEl.src = pageImages[currentPage-1];
+          currentPageEl.alt = `Embroidery Design Page ${currentPage}`;
+          
+          // Update page counter
+          pageCounter.textContent = `Page ${currentPage} of ${totalPages}`;
+          
+          // Update button states
+          prevButton.disabled = currentPage === 1;
+          nextButton.disabled = currentPage === totalPages;
+          
+          // Update active thumbnail
+          document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
+            if (index === currentPage-1) {
+              thumb.classList.add('active');
+            } else {
+              thumb.classList.remove('active');
+            }
+          });
+          
+          // Scroll active thumbnail into view
+          const activeThumb = document.querySelector('.thumbnail.active');
+          if (activeThumb) {
+            activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }
+          
+          // Fade image back in
+          setTimeout(() => {
+            currentPageEl.style.opacity = '1';
+            isNavigating = false;
+          }, 50);
+        }, 200);
+      }
+      
+      // Function to navigate to a specific page
+      function goToPage(pageNumber) {
+        if (isNavigating) return;
+        
+        isNavigating = true;
+        if (pageNumber >= 1 && pageNumber <= totalPages) {
+          currentPage = pageNumber;
+          updatePage();
+        } else {
+          isNavigating = false;
+        }
+      }
+      
+      // Event listeners for navigation buttons - UPDATED to prevent default behavior
+      prevButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (currentPage > 1 && !isNavigating) {
+          currentPage--;
+          updatePage();
+        }
+      });
+      
+      nextButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (currentPage < totalPages && !isNavigating) {
+          currentPage++;
+          updatePage();
+        }
+      });
+      
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' && currentPage > 1 && !isNavigating) {
+          e.preventDefault();
+          currentPage--;
+          updatePage();
+        } else if (e.key === 'ArrowRight' && currentPage < totalPages && !isNavigating) {
+          e.preventDefault();
+          currentPage++;
+          updatePage();
+        }
+      });
+      
+      // Initialize the viewer
+      updatePage();
+      
+      // Preload next and previous images for smoother navigation
+      function preloadImages() {
+        for (let i = 0; i < totalPages; i++) {
+          const img = new Image();
+          img.src = pageImages[i];
+        }
+      }
+      
+      // Start preloading images
+      preloadImages();
+    });
+  </script>
+</body>
+</html>

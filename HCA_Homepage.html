@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HCA - HomePage</title>
+    <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/hca_logo.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+
+.hero {
+  /* min-height:80vh; */
+  padding: 0px 0 0px;
+  background: #141414;
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+  display:grid;
+  place-items:center;
+  margin-bottom: 0; /* Ensures sections are flush */
+}
+
+.hero{
+  max-width: 100vw;   /* ✅ never wider than viewport */
+  overflow-x: hidden; /* ✅ stops children pushing out */
+}
+
+.hero img {
+  max-width: 100%;
+  /* border-radius: 12px; */
+  box-shadow: 0 8px 32px rgba(0,0,0,.085);
+  margin-bottom:16px;
+}
+.hero .inner{max-width:1260px;margin:0 auto;padding:64px 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.kicker{letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800;font-size:12px}
+.display{font-weight:900;line-height:1.05;font-size:54px;margin:8px 0 10px}
+.sub{opacity:.85;font-size:18px;max-width:60ch}
+.btn{display:inline-block;margin-top:14px;padding:12px 18px;border-radius:999px;font-weight:800;background:var(--btn);color:#fff;box-shadow:0 12px 30px rgba(0,0,0,.15)}
+
+.container{max-width:1300px;margin:0 auto;padding:11px 20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.ribbons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:22px}
+.ribbons .ribbon h3 {
+  transition: color 0.3s ease;
+}
+.ribbons .ribbon:hover h3 {
+  color: var(--primary); /* Change to your preferred color */
+}
+.ribbon h3{margin:4px 0 6px}.meta{color:var(--muted);font-size:13px}
+/* Cards */
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.card{
+  border-radius:16px;padding:18px;background:#363636;box-shadow:0 12px 32px rgba(0,0,0,.06);transition:transform .25s ease
+}
+.card:hover{transform:translateY(-4px)}
+.card h4{margin:10px 0 4px 0}
+.ctas{display:flex;gap:12px;margin-top:22px}
+.btn{
+  border-radius:12px;padding:14px 18px;font-weight:800;background:#111;color:#fff;
+  box-shadow:0 10px 24px rgba(0,0,0,.12)
+}
+.btn.alt{background:#fff;color:#111}
+/* Ribbon */
+.ribbon{
+  background:#0f0f10;color:#fff;border-radius:18px;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:22px;
+  box-shadow:var(--shadow);align-items:center
+}
+.ribbon.light{background:#ffffff;color:#939191;border:1px solid #e5e7eb}
+.ribbon h3{margin:0 0 8px 0;font-size:28px}
+.ribbon p{margin:0 0 14px 0;opacity:.9}
+.ribbon ul{margin:0;padding-left:18px;opacity:.9}
+/* Simple placeholder imagery */
+.svg-shot{width:100%;height:360px;border-radius:14px;box-shadow:0 18px 40px rgba(0,0,0,.08);background:#f7f7f7;display:flex;align-items:center;justify-content:center;color:#fff}
+/* Animations */
+.svg-shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px; /* Adjust value for more or less rounding */
+  overflow: hidden;
+  display: block;
+}
+.timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #e5e7eb;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+        .timeline-date {
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+@media (max-width: 980px){
+  .gateway-grid{grid-template-columns:1fr}
+  
+  .hero .inner{grid-template-columns:1fr;gap:24px;padding:56px 0}
+  .ribbon{grid-template-columns:1fr}
+  .timeline::after {
+                left: 31px;
+            }
+  .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+  .timeline-item:nth-child(even) {
+                left: 0;
+            }
+        }
+
+
+
+@keyframes fadeIn{from{opacity:0} to{opacity:1}}
+.carousel {
+  position: relative;
+  max-width: 100%;
+  border-radius: 12px;
+  /* box-shadow: 0 8px 32px rgba(0,0,0,0.085);
+  overflow: hidden; */
+  margin-bottom: 16px;
+}
+
+.carousel img {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+}
+
+.caption {
+  font-size: 16px;
+  color: #6b7280;
+  font-weight: 600;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  background-color: rgba(0,0,0,0.25);
+  border: none;
+  color: white;
+  font-size: 24px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  user-select: none;
+  transform: translateY(-50%);
+}
+
+.carousel-btn.prev {
+  left: 16px;
+}
+
+.carousel-btn.next {
+  right: 16px;
+}
+
+.carousel-btn:hover {
+  background-color: rgba(0,0,0,0.5);
+}
+.muted{color:var(--muted)}
+.hr{height:1px;background:#e5e7eb;margin:40px 0}
+
+@media (max-width:980px){.hero .inner{grid-template-columns:1fr}.grid-3{grid-template-columns:1fr}.ribbons{grid-template-columns:1fr}}
+
+/* Slider Styles */
+.slider-container {
+  max-width: 1400px;   /* Match your .container max-width */
+  margin: 0 auto;      /* Center horizontally */
+  /* padding-left: 20px;  Match .container padding */
+  /* padding-right: 20px; */
+  height: 570px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.slider {
+  display: flex;
+  width: 400%;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  width: 25%;
+  height: 100%;
+  position: relative;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slide-content {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  /* background: linear-gradient(rgba(0, 0, 0, 0.6), transparent); */
+  color: white;
+  padding: 40px 30px 40px 60px;
+  text-align: left;
+  max-width: 700px;
+}
+
+
+.slide-title {
+  font-size: 45px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  text-align: left; /* Added to ensure left alignment */
+}
+
+.slide-description {
+  font-size: 16px;
+  margin-bottom: 20px;
+  max-width: 600px;
+  margin-left: 0; /* Changed from auto */
+  margin-right: auto;
+  text-align: left; /* Added to ensure left alignment */
+}
+
+.slide-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--primary);
+  color: white;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.slide-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.slider-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  z-index: 10;
+}
+
+.slider-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.slider-dot.active {
+  background: white;
+}
+
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.7);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: none !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.slider-arrow:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.slider-arrow.prev {
+  left: 20px;
+}
+
+.slider-arrow.next {
+  right: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px){
+  .slide-content {
+    padding: 20px 10px 20px 20px;
+    max-width: 95%;
+  }
+}
+
+@media (max-width: 980px){
+  .hero .inner{grid-template-columns:1fr}.grid-3{grid-template-columns:1fr}.ribbons{grid-template-columns:1fr}
+  .slider-container {
+    height: 400px;
+  }
+  .slide-title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px){
+  .slider-container {
+    height: 350px;
+  }
+  .slide-title {
+    font-size: 20px;
+  }
+  .slide-description {
+    font-size: 14px;
+  }
+  .slider-arrow {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 480px){
+  .slider-container {
+    height: 300px;
+  }
+  .slide-content {
+    padding: 20px;
+  }
+  .slide-title {
+    font-size: 18px;
+  }
+}
+
+
+.news-events-section {
+  /* max-width: 1800px; */
+  margin: 40px 0 0 0;
+  padding: 0 10px 32px 10px;
+}
+.news-events-title {
+  text-align: center;
+  font-size: 2.4rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  margin-bottom: 28px;
+  color: #ffffff;
+}
+
+.news-events-slider-container {
+  position: relative;
+  max-width: 1450px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+.news-events-slider {
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.news-events-slider::-webkit-scrollbar {
+  display: none;
+}
+.news-events-item {
+  height: 300px;
+  flex: 0 0 350px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(60,60,60,0.10);
+  overflow: hidden;
+  transition: transform 0.22s;
+  margin-bottom: 6px;
+}
+.news-events-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.news-events-item:hover {
+  transform: translateY(-7px) scale(1.04);
+  box-shadow: 0 6px 32px rgba(30,60,90,0.18);
+}
+
+.news-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background: rgba(240,240,240,0.9);
+  color: #6e6767;
+  border: none;
+  font-size: 25px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(140,140,140,0.13);
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: background 0.18s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.news-arrow:hover {
+  background: #e6f0ff;
+  color: #155aba;
+}
+.news-arrow-left {
+  left: -18px;
+}
+.news-arrow-right {
+  right: -18px;
+}
+/* @media (max-width: 900px) {
+  .news-events-slider-container { max-width: 97vw; }
+  .news-events-slider { gap: 16px; }
+  .news-events-item, .news-events-item img { width: 160px !important; height: 110px !important; }
+}
+
+@media (max-width: 600px) {
+  .news-events-section { padding-bottom: 10px; }
+  .news-events-title { font-size: 1.4rem; }
+  .news-arrow { font-size: 24px; width: 34px; height: 34px; }
+  .news-events-item, .news-events-item img { width: 120px !important; height: 80px !important; }
+} */
+
+
+/* Brands Section Styles (reuse and adjust event slider styles) */
+.brands-events-section {
+  margin: 44px 0 0 0;
+  padding: 0 15px 28px 15px;
+}
+.brands-events-title {
+  text-align: center;
+  font-size: 2.4rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  margin-bottom: 28px;
+  color: #ffffff;
+}
+.brands-events-slider-container {
+  position: relative;
+  max-width: 1400px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+.brands-events-slider {
+  display: flex;
+  gap: 55px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 16px 0;
+  /* justify-content: center; */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+}
+.brands-events-slider::-webkit-scrollbar {
+  display: none;
+}
+.brands-events-item {
+  height: 80px;
+  flex: 0 0 140px;
+  background: transparent;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+  box-shadow: none;
+  transition: transform 0.16s;
+  scroll-snap-align: center;
+}
+.brands-events-item img {
+  max-width: 200px;
+  max-height: 100px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(0%);
+  transition: filter 0.2s;
+  display: block;
+  margin: 0 auto;
+}
+.brands-events-item img:hover {
+  filter: brightness(1.2);
+}
+.brands-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background: rgba(240,240,240,0.7);
+  color: #6e6767;
+  border: none;
+  font-size: 25px;
+  border-radius: 50%;
+  box-shadow: 0 1px 6px rgba(130,130,130,0.13);
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.16s;
+}
+.brands-arrow:hover {
+  background: #e6f0ff;
+  color: #155aba;
+}
+.brands-arrow-left {
+  left: -22px;
+}
+.brands-arrow-right {
+  right: -22px;
+}
+/* @media (max-width: 900px) {
+  .brands-events-slider-container { max-width: 98vw; }
+  .brands-events-slider { gap: 16px; }
+  .brands-events-item, .brands-events-item img { max-width: 70px; max-height: 38px; }
+}
+@media (max-width: 600px) {
+  .brands-events-title { font-size: 1.2rem; }
+  .brands-arrow { font-size: 20px; width: 30px; height: 30px; }
+  .brands-events-item, .brands-events-item img { max-width: 56px; max-height: 26px; }
+} */
+
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  }
+
+  @media (max-width: 900px) {
+    #contact .grid-3 {
+      flex-direction: column;
+      gap: 20px;
+    }
+    #contact .card {
+      flex-basis: 100% !important;
+      max-width: 100%;
+    }
+  }
+
+</style>
+
+</head>
+<body>
+<!-- New Header -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="HCA_Homepage.html" class="logo">
+      <img src="hca_logo.png" alt="HCA Monogram Logo">
+    </a>
+    
+    <div class="nav-container" id="nav-container">
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="#gateway" class="nav-link">Explore <i class="fas fa-chevron-down"></i></a>
+          <div class="dropdown">
+            <a href="HCA_AboutUs.html" class="dropdown-item">About Us</a>
+            <a href="HCA_Heritage.html" class="dropdown-item">Heritage</a>
+            <a href="HCA_Gallery_Hub.html" class="dropdown-item">Gallery</a>
+            <a href="#machines" class="dropdown-item">Featured Machines</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="HCA_Garments_Hub.html" class="nav-link">Garments</a>
+        </li>
+        <li class="nav-item">
+          <a href="HCA_Leather_Hub.html" class="nav-link">Leather</a>
+        </li>
+        <li class="nav-item">
+          <a href="HCA_Mattress_Hub.html" class="nav-link">Mattresses</a>
+        </li>
+      </ul>
+      
+      <div class="header-actions">
+        <a href="HCA_Contact.html" class="contact-btn">
+          Contact Us
+        </a>
+      </div>
+    </div>
+    
+    <div class="mobile-toggle" id="mobile-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</header>
+
+<!-- New Slider Section -->
+<section class="hero">
+<div class="slider-container">
+  <div class="slider">
+    <div class="slide">
+      <img src="HCA_1.jpeg" alt="Hari Chand Anand">
+      <div class="slide-content">
+        <p class="slide-title" style="font-size: x-large; color: var(--primary);">1867-1954</p>
+        <h2 class="slide-title">Hari Chand Anand</h2>
+        <p class="slide-description">"A visionary who turned collaboration into legacy."</p>
+        <a href="HCA_Heritage.html" class="slide-btn">Founder</a>
+      </div>
+    </div>
+    <div class="slide">
+      <img src="HCA_2.jpeg" alt="Deewan Chand Anand">
+      <div class="slide-content">
+        <p class="slide-title" style="font-size: x-large; color: var(--primary);">1910-2010</p>
+        <h2 class="slide-title">Deewan Chand Anand</h2>
+        <p class="slide-description">“Discipline. Dedication. Legacy.”</p>
+        <a href="HCA_Heritage.html" class="slide-btn">Second-Generation Visionary</a>
+      </div>
+    </div>
+    <div class="slide">
+      <img src="HCA_3.jpeg" alt="Mattress Production">
+      <div class="slide-content">
+        <h2 class="slide-title">Mattress Manufacturing Excellence</h2>
+        <p class="slide-description">Automated solutions for high-volume mattress production with perfect stitching every time.</p>
+        <a href="HCA_Mattress_Hub.html" class="slide-btn">View Technology</a>
+      </div>
+    </div>
+    <div class="slide">
+      <img src="HCA_4.jpeg" alt="Heritage Quality">
+      <div class="slide-content">
+        <h2 class="slide-title">Since 1910: Tradition Meets Innovation</h2>
+        <p class="slide-description">Over a century of providing industry-leading sewing automation with unparalleled service.</p>
+        <a href="HCA_Heritage.html" class="slide-btn">Our Story</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="slider-arrow prev">&#10094;</div>
+  <div class="slider-arrow next">&#10095;</div>
+  
+  <div class="slider-controls">
+    <div class="slider-dot active"></div>
+    <div class="slider-dot"></div>
+    <div class="slider-dot"></div>
+    <div class="slider-dot"></div>
+  </div>
+</div> 
+</section>
+
+
+<div id="gateway" class="section">
+  <div class="container">
+    <div class="grid-3">
+      <a class="tile" href="HCA_Garments_Hub.html">
+        <img src="garment.jpeg" alt="Garments">
+        <div class="pad">Garments</div>
+      </a>
+      <a class="tile" href="HCA_Leather_Hub.html">
+        <img src="leathers.jpeg" alt="Leather & Heavy-Duty">
+        <div class="pad">Leather & Heavy-Duty</div>
+      </a>
+      <a class="tile" href="HCA_Mattress_Hub.html">
+        <img src="mattress.jpeg" alt="Mattresses">
+        <div class="pad">Mattresses</div>
+      </a>
+    </div>
+
+
+
+    <div class="ribbons">
+      <a href="Embroidery/HCA_Embroidery_mc.html">
+        <div class="ribbon" style="grid-template-columns: none;">
+        <h3>Embroidery Machines</h3>
+        </div>
+      </a>
+      <a href="HCA_Cutting_mc.html">
+        <div class="ribbon" style="grid-template-columns: none;">
+        <h3>Cutting Machines</h3>
+        </div>
+      </a>
+    </div>
+  </div>
+
+
+
+      <div class="container section">
+  <div class="ribbon">
+    <div>
+      <h3>Pattern Sewing Machines</h3>
+      <p>High‑precision patterning with large stitch areas, templates, and programmable workflows.</p>
+      <ul>
+        <li>Work area up to 600×400 mm</li>
+        <li>Servo direct‑drive; vision & template options</li>
+        <li>ROI in months: faster cycles, fewer defects</li>
+      </ul>
+      <div class="ctas"><a class="btn alt" href="HCA_Pattern_Swing.html">Explore</a></div>
+    </div>
+<div class="svg-shot" style="position: relative; width: 100%; height: 360px; border-radius: 14px; box-shadow: 0 18px 40px rgba(0,0,0,.08); background: #f7f7f7; display: flex; align-items: center; justify-content: center; color: #fff; overflow: hidden;">
+  <img src="dy3020M.jpeg" alt="Pattern machine visual" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" />
+  <video src="p-s.mp4" 
+         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 12px; display: none;" 
+         muted 
+         loop>
+  </video>
+</div>
+
+  </div>
+  </div>
+</div>
+
+
+
+<!-- Featured machines grid (sample placeholders) -->
+<div class="container section" id="machines">
+  <h2 class="section-title">Featured Machines</h2>
+  <p class="muted">A glimpse of what’s possible. Full catalogue with filters & compare coming next.</p>
+  <div class="grid-3" style="margin-top:14px">
+    <a href="Duke_G/DY-3020M.html"><div class="card">
+      <div class="svg-shot" style="height:220px;background:#0f172a">
+        <img src="dy3020M.jpeg" alt="DY 3020M">
+      </div>
+      <h4>DY 3020M</h4>
+      <div class="meta">Direct Drive Procedural Floriation Machine</div>
+    </div></a>
+    <a href="Duke_G/DY-630GT.html"><div class="card">
+      <div class="svg-shot" style="height:220px;background:#111">
+        <img src="dy630gt.jpeg" alt="DY 630GT">
+      </div>
+      <h4>DY 630GT</h4>
+      <div class="meta">Electronic Bar Tacking Pattern Sewing Machine</div>
+    </div></a>
+    <a href="Duke_G/DY-9503-D5.html"><div class="card">
+      <div class="svg-shot" style="height:220px;background:#0b1020">
+        <img src="dy9503d4.jpeg" alt="DY 9503-D5">
+      </div>
+      <h4>DY 9503-D5</h4>
+      <div class="meta">Direct-Drive Single-needle Lockstitch Sewing Machine</div>
+    </div></a>
+  </div>
+</div>
+
+<!-- Academy -->
+<div class="container section" id="academy">
+  <h2 class="section-title">HCA Guides</h2>
+  <p class="muted">Learn the machinery landscape—built for students, process heads and educators.</p>
+  <div class="grid-3" style="margin-top:14px">
+    <div class="card">
+      <h4>How garments are made</h4>
+      <p class="muted">Design → cutting → fusing → sewing → finishing. Annotated maps & checklists.</p>
+    </div>
+    <div class="card">
+      <h4>Machine anatomy: Pattern & Buttonhole</h4>
+      <p class="muted">Interactive diagrams and stitch primers for serious learners.</p>
+    </div>
+    <div class="card">
+      <h4>Lab notes & internships</h4>
+      <p class="muted">Short videos, events calendar, and a CTA for careers.</p>
+    </div>
+  </div>
+</div>
+<!--
+Heritage Timeline
+    <div class="container section">
+        <h2>Our Heritage Timeline</h2>
+        <p class="muted">Over a century of innovation and craftsmanship in industrial sewing</p>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">1910</div>
+                    <h3>Foundation</h3>
+                    <p>Harichand Anand establishes the company in Lahore, starting with manual embroidery techniques.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">1950s-70s</div>
+                    <h3>New Beginnings</h3>
+                    <p>Industrial expansion; adoption of modern sewing lines.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">2000s</div>
+                    <h3>Automation Era</h3>
+                    <p>Automation, CNC pattern sewing, and integrated solutions.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Today</div>
+                    <h3>Future Vision</h3>
+                    <p>HCA: heritage + innovation for Garments, Leather, and Mattresses.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+  -->
+
+        <!-- News/event items as needed -->
+<section class="news-events-section">
+  <h2 class="news-events-title">News &amp; Events</h2>
+  <div class="news-events-slider-container">
+    <button class="news-arrow news-arrow-left" aria-label="Scroll Left">&#10094;</button>
+    <div class="news-events-slider">
+      <!-- Repeat this block for 10–12 images -->
+      <div class="news-events-item">
+        <img src="news1.jpeg" alt="Event 1">
+      </div>
+      <div class="news-events-item">
+        <img src="news2.jpeg" alt="Event 2">
+      </div>
+      <div class="news-events-item">
+        <img src="news3.jpeg" alt="Event 3">
+      </div>
+      <div class="news-events-item">
+        <img src="news4.jpeg" alt="Event 4">
+      </div>
+      <div class="news-events-item">
+        <img src="news5.jpeg" alt="Event 5">
+      </div>
+      <div class="news-events-item">
+        <img src="news6.jpeg" alt="Event 6">
+      </div>
+      <div class="news-events-item">
+        <img src="news7.jpeg" alt="Event 7">
+      </div>
+      <div class="news-events-item">
+        <img src="news8.jpeg" alt="Event 8">
+      </div>
+      <div class="news-events-item">
+        <img src="news9.jpeg" alt="Event 9">
+      </div>
+      <div class="news-events-item">
+        <img src="news10.jpeg" alt="Event 10">
+      </div>
+      <div class="news-events-item">
+        <img src="news5.jpeg" alt="Event 11">
+      </div>
+      <div class="news-events-item">
+        <img src="news6.jpeg" alt="Event 12">
+      </div>
+      <!-- ...Add more news-events-item blocks as needed... -->
+    </div>
+    <button class="news-arrow news-arrow-right" aria-label="Scroll Right">&#10095;</button>
+  </div>
+</section>
+
+<!-- Brands Section -->
+<section class="brands-events-section">
+  <h2 class="brands-events-title">Our Prestigious Brands</h2>
+  <div class="brands-events-slider-container">
+    <button class="brands-arrow brands-arrow-left" aria-label="Scroll Left">&#10094;</button>
+    <div class="brands-events-slider">
+      <div class="brands-events-item">
+        <img src="duke.png" alt="DUKE Logo" />
+      </div>
+      <div class="brands-events-item">
+        <img src="highlead.png" alt="HIGHLEAD Logo" />
+      </div>
+      <div class="brands-events-item">
+        <img src="vios.png" alt="VIOS Logo" />
+      </div>
+      <div class="brands-events-item">
+        <img src="kansai.png" alt="KANSAI SPECIAL Logo" />
+      </div>
+      <div class="brands-events-item">
+        <img src="lensh.png" alt="LENSH Logo" />
+      </div>
+      <div class="brands-events-item">
+        <img src="hikari.png" alt="HIKARI Logo" />
+      </div>
+      <div class="brands-events-item">
+        <img src="duke_jia.png" alt="DUKE JIA Logo" />
+      </div>
+      <div class="brands-events-item">
+        <img src="epa.png" alt="EPA Logo" />
+      </div>
+      <div class="brands-events-item">
+        <img src="hemway.png" alt="HEMWAY Logo" />
+      </div>
+      <div class="brands-events-item">
+        <img src="loiva.png" alt="LOIVA Logo" />
+      </div>
+      <div class="brands-events-item">
+        <img src="vim.png" alt="VIM Logo" />
+      </div>
+      <div class="brands-events-item">
+        <img src="umit_makina.png" alt="UMIT MAKINA Logo" />
+      </div>
+      <div class="brands-events-item">
+        <img src="racing.png" alt="RACING Logo" />
+      </div>
+      <!-- Add/replace logos as needed -->
+    </div>
+    <button class="brands-arrow brands-arrow-right" aria-label="Scroll Right">&#10095;</button>
+  </div>
+</section>
+
+
+
+<!-- Contact / Conversion -->
+<div class="container section" id="contact">
+  <h2 class="section-title">Get in Touch</h2>
+  <p class="muted">Book a demo, request pricing, or route to WhatsApp Business—fast.</p>
+  <div class="grid-3" style="margin-top:14px; gap: 24px; display: flex; flex-wrap: wrap; justify-content: center;">
+    <div class="card" style="flex: 1 1 280px; display: flex; flex-direction: column; padding: 30px; border-radius: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease;">
+      <h4>Request a Quote</h4>
+      <p class="muted" style="flex-grow: 1;">Tell us your application, materials and throughput. We’ll map the right stack.</p>
+    </div>
+    <div class="card" style="flex: 1 1 280px; display: flex; flex-direction: column; padding: 30px; border-radius: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease;">
+      <h4>Book a Live Demo</h4>
+      <p class="muted" style="flex-grow: 1;">See pattern, buttonhole and automat workflows in action.</p>
+    </div>
+    <div class="card" style="flex: 1 1 280px; display: flex; flex-direction: column; padding: 30px; border-radius: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease;">
+      <h4>WhatsApp Business</h4>
+      <p class="muted" style="flex-grow: 1;">Quick answers, brochures and videos on your phone.</p>
+    </div>
+  </div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="footer-heading">Legal</div>
+      <a href="#">Terms of Use</a>
+      <a href="#">Cookies Policy</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading">Products</div>
+      <a href="HCA_Garments_Hub.html">Garments</a>
+      <a href="HCA_Leather_Hub.html">Leather &amp; Heavy-Duty</a>
+      <a href="HCA_Mattress_Hub.html">Mattresses</a>
+      <a href="HCA_Pattern_Swing.html">Pattern Sewing Machines</a>
+      <a href="HCA_Embroidery_mc.html">Embroidery Machines</a>
+      <a href="HCA_Cutting_mc.html">Cutting Machines</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading">Social Media</div>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/grouphca/" style="color: #b3a0a0;"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/hcaindia" style="color: #b3a0a0;"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/hca.co/" style="color: #b3a0a0;"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/channel/UCZQc6oBcEEQ_SFdJqPNamJQ" style="color: #b3a0a0;"><i class="fab fa-youtube"></i></a>
+        <a href="https://in.linkedin.com/company/hcaco" style="color: #b3a0a0;"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    
+    <div class="footer-col">
+      <div class="footer-heading"><a href="HCA_Contact.html">Contact Us</a></div>
+      <div>Mobile: <a href="tel:+918860086712">+91 8860086712</a></div>
+      <div>Landline: 011 4656 1111</div>
+      <div><a href="mailto:enquiry@grouphca.com">enquiry@grouphca.com</a></div>
+      <div><a href="mailto:sales1@grouphca.com">sales1@grouphca.com</a></div> 
+    </div>
+    
+    
+  </div>
+  <div class="footer-bottom">©1910 - 2024 HARI CHAND ANAND &amp; CO. ALL RIGHTS RESERVED.</div>
+</footer>
+<script>
+      // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navContainer = document.getElementById('nav-container');
+    
+    mobileToggle.addEventListener('click', () => {
+      mobileToggle.classList.toggle('active');
+      navContainer.classList.toggle('active');
+    });
+    
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  const svgShotDiv = document.querySelector('.svg-shot');
+  const video = svgShotDiv.querySelector('video');
+  const image = svgShotDiv.querySelector('img');
+  
+  svgShotDiv.addEventListener('mouseenter', () => {
+    image.style.display = 'none';
+    video.style.display = 'block';
+    video.play();
+  });
+
+  svgShotDiv.addEventListener('mouseleave', () => {
+    video.pause();
+    video.style.display = 'none';
+    image.style.display = 'block';
+  });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const slider = document.querySelector('.slider');
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.slider-dot');
+  const prevArrow = document.querySelector('.slider-arrow.prev');
+  const nextArrow = document.querySelector('.slider-arrow.next');
+  
+  let currentSlide = 0;
+  const slideCount = slides.length;
+  let autoSlideInterval;
+  
+  // Function to update slide position
+  function goToSlide(index) {
+    if (index < 0) {
+      index = slideCount - 1;
+    } else if (index >= slideCount) {
+      index = 0;
+    }
+    
+    slider.style.transform = `translateX(-${index * 25}%)`;
+    
+    // Update active dot
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[index].classList.add('active');
+    
+    currentSlide = index;
+  }
+  
+  // Next slide function
+  function nextSlide() {
+    goToSlide(currentSlide + 1);
+  }
+  
+  // Previous slide function
+  function prevSlide() {
+    goToSlide(currentSlide - 1);
+  }
+  
+  // Set up auto sliding
+  function startAutoSlide() {
+    autoSlideInterval = setInterval(nextSlide, 6000); // Change slide every 6 seconds
+  }
+  
+  // Stop auto sliding
+  function stopAutoSlide() {
+    clearInterval(autoSlideInterval);
+  }
+  
+  // Event listeners for arrows
+  nextArrow.addEventListener('click', function() {
+    stopAutoSlide();
+    nextSlide();
+    startAutoSlide();
+  });
+  
+  prevArrow.addEventListener('click', function() {
+    stopAutoSlide();
+    prevSlide();
+    startAutoSlide();
+  });
+  
+  // Event listeners for dots
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', function() {
+      stopAutoSlide();
+      goToSlide(index);
+      startAutoSlide();
+    });
+  });
+  
+  // Pause auto slide when hovering over slider
+  const sliderContainer = document.querySelector('.slider-container');
+  sliderContainer.addEventListener('mouseenter', stopAutoSlide);
+  sliderContainer.addEventListener('mouseleave', startAutoSlide);
+  
+  // Start auto sliding on page load
+  startAutoSlide();
+});
+
+// News & Events slider arrows functionality
+document.querySelector('.news-arrow-left').onclick = function() {
+  document.querySelector('.news-events-slider').scrollBy({ left: -250, behavior: 'smooth' });
+};
+document.querySelector('.news-arrow-right').onclick = function() {
+  document.querySelector('.news-events-slider').scrollBy({ left: 250, behavior: 'smooth' });
+};
+
+
+
+
+
+
+  // const photos = [
+  //   { src: '01.jpg', caption: 'A legacy since 1910 — our original embroidery book & workmanship.' },
+  //   { src: '02.jpg', caption: 'Our historic sewing equipment from decades ago.' },
+  //   { src: '03.jpg', caption: 'An early day factory photo showcasing craftsmanship.' }
+  // ];
+
+  // let currentIndex = 0;
+
+  // const imgElement = document.getElementById('heritage-photo');
+  // const captionElement = document.getElementById('caption-text');
+
+  // function showPhoto(index) {
+  //   if (index < 0) index = photos.length - 1;
+  //   if (index >= photos.length) index = 0;
+  //   currentIndex = index;
+  //   imgElement.src = photos[index].src;
+  //   captionElement.textContent = photos[index].caption;
+  // }
+
+  // function changePhoto(direction) {
+  //   showPhoto(currentIndex + direction);
+  // }
+
+  // // Optional: Automatically cycle every 5 seconds
+  // setInterval(() => {
+  //   changePhoto(1);
+  // }, 5000);
+
+  // Brands slider arrows functionality
+document.addEventListener('DOMContentLoaded', function() {
+  function getBrandSliderItemWidth() {
+    const slider = document.querySelector('.brands-events-slider');
+    const item = slider.querySelector('.brands-events-item');
+    if (!item) return 200; // fallback width
+    const style = window.getComputedStyle(item);
+    // Default gap sizes used in CSS
+    let gap = 46;
+    if (window.innerWidth < 900) gap = 16;
+    if (window.innerWidth < 600) gap = 6;
+    return item.offsetWidth + gap;
+  }
+
+  document.querySelector('.brands-arrow-left').onclick = function() {
+    const slider = document.querySelector('.brands-events-slider');
+    slider.scrollBy({ left: -getBrandSliderItemWidth(), behavior: 'smooth' });
+  };
+
+  document.querySelector('.brands-arrow-right').onclick = function() {
+    const slider = document.querySelector('.brands-events-slider');
+    slider.scrollBy({ left: getBrandSliderItemWidth(), behavior: 'smooth' });
+  };
+});
+
+
+</script></body>
+
+</html>
+
+
+
+

@@ -1,0 +1,13 @@
+{
+  "cleanUrls": false,
+  "rewrites": [
+    { "source": "/", "destination": "/HCA_Homepage.html" },
+    { "source": "/about", "destination": "/HCA_AboutUs.html" },
+    { "source": "/contact", "destination": "/HCA_Contact.html" },
+    { "source": "/garments", "destination": "/HCA_Garments_Hub.html" },
+    { "source": "/leather", "destination": "/HCA_Leather_Hub.html" },
+    { "source": "/mattress", "destination": "/HCA_Mattress_Hub.html" },
+    { "source": "/pattern", "destination": "/HCA_Pattern_Swing.html" },
+    { "source": "/gallery", "destination": "/HCA_Gallery_Hub.html" }
+  ]
+}

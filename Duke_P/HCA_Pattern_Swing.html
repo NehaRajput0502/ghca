@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HCA — Pattern Sewing</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"><style>
+:root{  --primary: #766c6c;
+  --primary-dark: #494343;--bg:#ffffff; --ink:#0b0b0c; --muted:#6b7280; --btn:#0f172a}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+.topbar{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);border-bottom:1px solid #eee}
+.topbar-inner{max-width:1260px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:900;letter-spacing:.2px}
+.nav{display:flex;gap:18px}.nav a{font-weight:700;font-size:14px}
+.hero {
+  min-height: 10vh;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, #fff, #f7f9fc);
+}.hero img {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.085);
+  margin-bottom:16px;
+}
+.container {
+  display: flex;
+  justify-content: space-between; /* Places kicker left, display right */
+  align-items: center; /* Vertically aligns them in the middle */
+  width: 100%; /* Ensures full width for spacing */
+}
+.inner{max-width:1260px;margin:0 auto;padding:64px 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.kicker {
+  font-weight: 900;
+  line-height: 1.05;
+  font-size: 35px;
+  margin: 8px 0 10px;
+  text-align: left;
+}
+
+.display {
+  font-weight: 800;
+  font-size: 30px;
+  text-align: right;
+}
+.sub{opacity:.85;font-size:18px;max-width:60ch}
+.btn{display:inline-block;margin-top:14px;padding:12px 18px;border-radius:999px;font-weight:800;background:var(--btn);color:#fff;box-shadow:0 12px 30px rgba(0,0,0,.15)}
+.btn.alt{background:#fff;color:#111;border:1px solid #111}
+.section{padding:44px 0}
+.container{max-width:1260px;margin:0 auto;padding:0 20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.tile{position:relative;border-radius:18px;overflow:hidden;height:260px;box-shadow:0 20px 56px rgba(0,0,0,.12);display:flex;align-items:flex-end}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tile .pad{position:relative;padding:18px;color:#fff;font-weight:900;text-shadow:0 8px 22px rgba(0,0,0,.55);z-index:1}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.0),rgba(0,0,0,.65))}
+.ribbons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:22px}
+.ribbon{border:1px solid #e5e7eb;border-radius:16px;padding:18px;background:#fff;box-shadow:0 12px 32px rgba(0,0,0,.06)}
+.ribbon h3{margin:4px 0 6px}.meta{color:var(--muted);font-size:13px}
+.tile img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.tile:hover img {
+  transform: scale(1.08);
+}
+
+
+.video-section {
+  padding: 44px 0 14px 0;
+  max-width: 1260px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+.video-title {
+  font-weight: 900; 
+  font-size: 2.5em;
+  text-align: center;
+  margin-bottom: 24px;
+  padding: 0 20px;
+  transition: all 0.4s ease;
+}
+.video-landscape-container {
+  position: relative;
+  width: 90%;
+  max-width: 1100px;
+  aspect-ratio: 16/9;
+  margin: 0 auto 36px auto;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(40,50,90,0.18);
+  background: #000;
+  transition: all 0.4s ease;
+}
+.video-landscape-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Sticky video when scrolled */
+.video-sticky {
+  position: sticky;
+  top: 80px;
+  z-index: 20;
+  transition: all 0.4s ease;
+}
+
+/* Reduced size when scrolled */
+.video-reduced {
+  width: 60% !important;
+  max-width: 700px !important;
+  margin: 0 auto 20px auto !important;
+  box-shadow: 0 8px 25px rgba(40,50,90,0.15) !important;
+  border-radius: 12px !important;
+}
+
+.cards-section {
+  padding: 52px 0 14px 0;
+  max-width: 1260px;
+  margin: 0 auto;
+}
+.cards-title {
+  font-weight: 900; 
+  font-size: 2.5em;
+  text-align: center;
+  margin-bottom: 24px;
+  padding: 0 20px;
+}
+ .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .card {
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .card:hover .card-img {
+            transform: scale(1.05);
+        }
+        
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+            padding: 2rem 1.5rem 1.5rem;
+            color: white;
+        }
+        
+        .card-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+        
+        .card-desc {
+            font-size: 1rem;
+            color: #e5e5e7;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+.lineup-section {
+  background: #fafbfe;
+  padding: 52px 0 22px 0;
+  margin-top: 54px;
+}
+.lineup-inner {
+  max-width: 1260px;
+  margin: 0 auto;
+  text-align: center;
+}
+.lineup-title {
+  font-size: 2.5em;
+  font-weight: 900;
+  margin-bottom: 38px;
+}
+.lineup-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 24px;
+  margin-bottom: 30px;
+}
+.lineup-item {
+  background: #e0dddd; border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 24px 0;
+  text-align: center;
+}
+.lineup-img-container {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.lineup-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.lineup-model { font-weight: 800; font-size: 1em; margin-bottom: 8px; }
+.lineup-desc { color: var(--muted); font-size: 0.99em; }
+
+.lineup-table {
+  margin: 0 auto;
+  border-spacing: 0 8px;
+  width: 100%;
+  max-width: 1100px;
+  background: transparent;
+}
+.lineup-table th {
+  font-weight: 800;
+  color: #1d233d;
+  font-size: 1em;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #e1e5ef;
+}
+.lineup-table td {
+  padding: 7px 0;
+  font-size: .99em;
+}
+
+/* Responsive Design */
+@media (max-width:1100px){
+  .lineup-grid { grid-template-columns: 1fr 1fr; }
+  .video-reduced {
+    width: 70% !important;
+  }
+}
+@media (max-width:700px){
+  .lineup-grid { grid-template-columns: 1fr; }
+  .video-landscape-container { 
+    width: 95%;
+    max-width: none;
+  }
+  .video-reduced {
+    width: 85% !important;
+    max-width: none !important;
+  }
+  .video-title, .cards-title, .lineup-title {
+    font-size: 2em;
+  }
+}
+@media (max-width: 768px){
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    height: 350px;
+  }
+}
+.logo img {
+  display: block;
+  height: 38px;
+  width: auto;
+}
+</style>
+
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">
+  <img src="hca_logo.png" alt="HCA Monogram Logo" style="height:38px;">
+</div>
+
+    <nav class="nav">
+      <a href="#gateway">Explore</a>
+      <a href="HCA_Garments.html">Garments</a>
+      <a href="../HCA_Leather_Hub.html">Leather</a>
+      <a href="../HCA_Mattress_Hub.html">Mattresses</a>
+      <a href="HCA_Guides.html">Guides</a>
+      <a href="HCA_Heritage.html">Heritage</a>
+      <a href="../HCA_Contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+      <div class="kicker">Pattern Sewing</div>
+      <div class="display">Designed to perform</div>
+    </div>
+</section>
+
+<div class="video-section">
+  <div class="video-landscape-container" id="videoContainer">
+    <video autoplay muted loop playsinline>
+      <source src="ps.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+
+<!-- Cards Grid Section -->
+<div class="cards-section">
+  <div class="cards-title">Get to know Pattern Sewing</div>
+  <div class="cards-grid">
+    <div class="card">
+      <img src="dy3020m1.jpeg" class="card-img" alt="DY 3020 M">
+      <div class="card-overlay">
+        <div class="card-title">DY 3020 M</div>
+        <div class="card-desc">DIRECT DRIVE PROGRAMMABLE PATTERN SEWING MACHINE</div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <img src="dy2210g.jpeg" class="card-img" alt="DY 2210 G">
+      <div class="card-overlay">
+        <div class="card-title">DY 2210 G</div>
+        <div class="card-desc">PATTERN SEWING MACHINE</div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <img src="dy6040gb.jpeg" class="card-img" alt="DY 6040GB">
+      <div class="card-overlay">
+        <div class="card-title">DY 6040GB</div>
+        <div class="card-desc">PROGRAMMABLE PATTERN TACKER MACHINE</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lineup/Comparison Section -->
+<div class="lineup-section" id="lineup">
+  <div class="lineup-inner">
+    <div class="lineup-title">Explore the lineup</div>
+    <div class="lineup-grid">
+      <div class="lineup-item">
+        <div class="lineup-img-container">
+          <img src="https://cdn.pixabay.com/photo/2016/05/03/17/40/sewing-machine-1369658_1280.jpg" alt="PatternSew Basic" class="lineup-img">
+        </div>
+        <div class="lineup-model">PatternSew Basic</div>
+        <div class="lineup-desc">Manual input, apparel focus</div>
+      </div>
+      <div class="lineup-item">
+        <div class="lineup-img-container">
+          <img src="https://cdn.pixabay.com/photo/2016/05/03/17/40/sewing-machine-1369658_1280.jpg" alt="PatternSew Pro" class="lineup-img">
+        </div>
+        <div class="lineup-model">PatternSew Pro</div>
+        <div class="lineup-desc">Digital templates, semi-auto</div>
+      </div>
+      <div class="lineup-item">
+        <div class="lineup-img-container">
+          <img src="https://cdn.pixabay.com/photo/2016/05/03/17/40/sewing-machine-1369658_1280.jpg" alt="PatternSew CNC" class="lineup-img">
+        </div>
+        <div class="lineup-model">PatternSew CNC</div>
+        <div class="lineup-desc">USB import, full CNC control</div>
+      </div>
+      <div class="lineup-item">
+        <div class="lineup-img-container">
+          <img src="https://cdn.pixabay.com/photo/2016/05/03/17/40/sewing-machine-1369658_1280.jpg" alt="PatternSew Ultra" class="lineup-img">
+        </div>
+        <div class="lineup-model">PatternSew Ultra</div>
+        <div class="lineup-desc">Edge-to-edge automation, large format</div>
+      </div>
+    </div>
+    <table class="lineup-table">
+      <tr>
+        <th>Model</th>
+        <th>Template Input</th>
+        <th>Max Sewing Area</th>
+        <th>Automation</th>
+        <th>Speciality</th>
+      </tr>
+      <tr>
+        <td>PatternSew Basic</td>
+        <td>Manual</td>
+        <td>300x400mm</td>
+        <td>No</td>
+        <td>Apparel, Parts</td>
+      </tr>
+      <tr>
+        <td>PatternSew Pro</td>
+        <td>Semi-Digital</td>
+        <td>400x500mm</td>
+        <td>Assist arms</td>
+        <td>Shirts, Uniforms</td>
+      </tr>
+      <tr>
+        <td>PatternSew CNC</td>
+        <td>USB/Digital</td>
+        <td>600x800mm</td>
+        <td>Full CNC</td>
+        <td>Custom Parts</td>
+      </tr>
+      <tr>
+        <td>PatternSew Ultra</td>
+        <td>Digital/Scan</td>
+        <td>1000x1200mm</td>
+        <td>Edge-to-Edge</td>
+        <td>Upholstery, Leather</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const videoContainer = document.getElementById('videoContainer');
+  const cardsSection = document.querySelector('.cards-section');
+  
+  // Function to handle scroll events
+  function handleScroll() {
+    const scrollPosition = window.scrollY;
+    
+    // Get the position of the cards section relative to the viewport
+    const cardsRect = cardsSection.getBoundingClientRect();
+    
+    // When we've scrolled past 100px or when cards section is near the top
+    if (scrollPosition > 100 || cardsRect.top < window.innerHeight * 0.5) {
+      videoContainer.classList.add('video-reduced');
+    } else {
+      videoContainer.classList.remove('video-reduced');
+    }
+  }
+  
+  // Listen for scroll events with throttling
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        handleScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+  
+  // Initial check
+  handleScroll();
+});
+</script>
+</body>
+</html>
